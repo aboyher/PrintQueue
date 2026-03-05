@@ -23,14 +23,15 @@
 npm-debug.log*
 
 # env files
+.env
 .env*.local
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma
-/prisma/*.db
-/prisma/*.db-journal
+# prisma / sqlite
+*.db
+*.db-journal
 
 /generated/prisma
