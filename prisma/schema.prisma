@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  avatar    String?
+  createdAt DateTime    @default(now())
+  prints    PrintJob[]
+  comments  Comment[]
+}
+
+model PrintJob {
+  id           String    @id @default(cuid())
+  title        String
+  url          String?
+  thumbnailUrl String?
+  description  String?
+  priority     String    @default("normal")
+  status       String    @default("queued")
+  position     Int       @default(0)
+  requestedBy  User      @relation(fields: [userId], references: [id])
+  userId       String
+  comments     Comment[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  completedAt  DateTime?
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  text       String
+  printJob   PrintJob @relation(fields: [printJobId], references: [id], onDelete: Cascade)
+  printJobId String
+  author     User     @relation(fields: [userId], references: [id])
+  userId     String
+  createdAt  DateTime @default(now())
+}

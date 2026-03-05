@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "PrintQueue - Add to 3D Print Queue",
+  "version": "1.0.0",
+  "description": "Quickly add 3D models from MakerWorld to your PrintQueue",
+  "permissions": ["activeTab"],
+  "icons": {
+    "48": "icon-48.svg",
+    "128": "icon-128.svg"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon-48.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://makerworld.com/*",
+        "*://www.makerworld.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}
